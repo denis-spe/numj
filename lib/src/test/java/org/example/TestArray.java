@@ -3,15 +3,14 @@ package org.example;
 import org.junit.Test;
 import org.junit.Before;
 import static org.junit.Assert.*;
-import org.example.Array;
 import static org.example.Array.*;
 import static java.lang.System.out;
 
 
 public class TestArray{
     // Declare the Array object.
-    Array doubleArray;
-    Array arrayOfArray;
+    Array<?> doubleArray;
+    Array<?> arrayOfArray;
 
     /**
      * Set up the test before 
@@ -48,6 +47,11 @@ public class TestArray{
 	    .toString(),
 	    "[[2, 6, 7], [2, 7, 1]]"
 	    );
-
     }
+
+	@Test public void testSum(){
+        assertEquals(6, array(1, 4, 1).sum(), 0.0);
+		assertEquals(10, array(1, 4, 1, 4).sum(), 0.0);
+		assertEquals(8.2, array(2.2, 4.9, 1.1).sum(), 0.0);
+	}
 }
