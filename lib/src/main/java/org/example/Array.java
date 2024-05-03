@@ -1,12 +1,13 @@
 package org.example;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 
-public class Array<T> implements Stats, Iterator<T> {
+public class Array<T> implements Stats, Iterable<T>{
     // Class variable
     /**
      * List values
@@ -22,9 +23,6 @@ public class Array<T> implements Stats, Iterator<T> {
      * arr of value variable
      */
     boolean useArrWithArr;
-
-    // Element index
-    int elementIndex = 0;
 
     // Constructor
     
@@ -67,7 +65,7 @@ public class Array<T> implements Stats, Iterator<T> {
     }
 
     /** 
-     * This represent string values.
+     * This represents string values.
      * @param num: array values.
      * @return Array.
      */
@@ -76,7 +74,7 @@ public class Array<T> implements Stats, Iterator<T> {
     }
 
     /**
-     * This represent character values.
+     * This represents character values.
      * @param values: array values.
      * @return Array.
      */
@@ -93,28 +91,6 @@ public class Array<T> implements Stats, Iterator<T> {
         return new Array<>(arrays);
     }
 
-    @Override
-    public boolean hasNext(){
-        return this.useArrWithArr ?
-                elementIndex < this.arrWithArr.size() :
-                elementIndex < this.arr.size();
-    }
-
-    /**
-     * Returns the next element in the iteration.
-     *
-     * @return the next element in the iteration
-     * @throws NoSuchElementException if the iteration has no more elements
-     */
-    @Override
-    public T next() {
-        if (hasNext()){
-            return this.useArrWithArr ?
-                    (T) this.arrWithArr.get(elementIndex++) :
-                    this.arr.get(elementIndex++);
-        }
-        return null;
-    }
 
     /**
      * Computes the mean of the numeric array.
@@ -151,5 +127,19 @@ public class Array<T> implements Stats, Iterator<T> {
 		this.arrWithArr
 			.toString() : 
 		this.arr.toString();
+    }
+
+    /**
+     * Returns an iterator over elements of type {@code T}.
+     *
+     * @return an Iterator.
+     */
+    @SuppressWarnings("unchecked")
+    @NonNull
+    @Override
+    public Iterator<T> iterator() {
+        return this.useArrWithArr ?
+                (Iterator<T>) this.arrWithArr.iterator() :
+                this.arr.listIterator();
     }
 }

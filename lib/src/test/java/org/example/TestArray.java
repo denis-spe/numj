@@ -54,4 +54,10 @@ public class TestArray{
 		assertEquals(10, array(1, 4, 1, 4).sum(), 0.0);
 		assertEquals(8.2, array(2.2, 4.9, 1.1).sum(), 0.0);
 	}
+
+	@Test public void testNext(){
+		for (Object value: array(array(4, 9), array(77, 9, 0), array(76, 9, 3))){
+			out.println(value);
+		}
+	}
 }
