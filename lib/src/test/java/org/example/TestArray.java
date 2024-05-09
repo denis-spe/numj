@@ -55,9 +55,14 @@ public class TestArray{
 		assertEquals(8.2, array(2.2, 4.9, 1.1).sum(), 0.0);
 	}
 
-	@Test public void testNext(){
-		for (Object value: array(array(4, 9), array(77, 9, 0), array(76, 9, 3))){
-			out.println(value);
+	@Test public void testIterator(){
+		for (Integer num: array(2)){
+			assertEquals(num, 2, 0);
 		}
+	}
+
+	@Test public void testSize(){
+		assertEquals(array(23, 4, 3).size(), 3);
+		assertEquals(array(array(21, 3), array(1.23, 123.1)).size(), 2);
 	}
 }

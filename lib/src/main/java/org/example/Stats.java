@@ -12,4 +12,10 @@ public interface Stats{
      * @return total sum of the array
      */
     public double sum();
+
+    /**
+     * Represents the size of the array.
+     * @return size the array.
+     */
+    public int size();
 }

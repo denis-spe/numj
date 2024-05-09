@@ -12,17 +12,17 @@ public class Array<T> implements Stats, Iterable<T>{
     /**
      * List values
      */
-    List<T> arr;
+    private List<T> arr;
 
     /**
      * List of arrays
      */
-    List<Array<?>> arrWithArr;
+    private List<Array<?>> arrWithArr;
     /**
      * check whether to use arrWithArr or
      * arr of value variable
      */
-    boolean useArrWithArr;
+    private final boolean useArrWithArr;
 
     // Constructor
     
@@ -119,6 +119,18 @@ public class Array<T> implements Stats, Iterable<T>{
         return Double.parseDouble(
                 decimalFormat.format(
                         sum.orElse(0.0)));
+    }
+
+    /**
+     * Represents the size of the array.
+     *
+     * @return size the array.
+     */
+    @Override
+    public int size() {
+        return this.useArrWithArr ?
+                this.arrWithArr.size() :
+                this.arr.size();
     }
 
     @Override
