@@ -1,14 +1,17 @@
 package org.example;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Arrays;
 
 public class Array<T> implements Stats, Iterable<T>{
     // Class variable
+
     /**
      * List values
      */
@@ -28,7 +31,7 @@ public class Array<T> implements Stats, Iterable<T>{
     
     /**
      * Array constructor
-     * @param num: array values
+     * @param num:(T) array values
      */
     @SafeVarargs
     public Array(T... num){
@@ -37,7 +40,7 @@ public class Array<T> implements Stats, Iterable<T>{
     }
     /**
      * Array of array constructor
-     * @param array: array as arguments
+     * @param array:(Array<?>) array as arguments
      */
     public Array(Array<?>... array){
        this.arrWithArr = Arrays.asList(array);
@@ -66,35 +69,108 @@ public class Array<T> implements Stats, Iterable<T>{
 
     /** 
      * This represents string values.
-     * @param num: array values.
+     * @param str:(String) array values.
      * @return Array.
      */
-    public static Array<String> array(String... num){
-        return new Array<>(num);
+    public static Array<String> array(String... str){
+        return new Array<>(str);
     }
 
     /**
      * This represents character values.
-     * @param values: array values.
+     * @param character: (Character) array values.
      * @return Array.
      */
-    public static Array<Character> array(Character... values){
-        return new Array<>(values);
+    public static Array<Character> array(Character... character){
+        return new Array<>(character);
     }
 
     /**
      * This represent Arrays as values.
-     * @param arrays: array values.
+     * @param arrays: (Array<?>) array values.
      * @return Array of array.                 
      */
     public static Array<?> array(Array<?>... arrays){
         return new Array<>(arrays);
     }
 
+    /**
+     * Add element to the array.
+     * @param element: (T) Element to the array.
+     * @return (int) Size of the array.
+     */
+    public int add(T element){
+        // Create a new arraylist
+        ArrayList<T> arrayList = new ArrayList<>(this.arr);
+
+        // Add the element to the array
+        arrayList.add(element);
+
+        // Assign the arrayList to the list
+        this.arr = arrayList;
+        return this.arr.size();
+    }
+
+    /**
+     * Add element to the array
+     * @param array: (Array<?>) Element to the array
+     * @return (int) Size of the array.
+     */
+    public int add(Array<?> array){
+        // Create a new arraylist
+        ArrayList<Array<?>> arrayList = new ArrayList<>(this.arrWithArr);
+
+        // Add the element to the array
+        arrayList.add(array);
+
+        // Assign the arrayList to the list
+        this.arrWithArr = arrayList;
+
+        return arrWithArr.size();
+    }
+
+    /**
+     * Add element to the specified index.
+     * @param index: (int) index to add the index.
+     * @param array: (Array<?>) element to add to the array
+     *  @return (int) Size of the array.
+     */
+    public int add(int index, Array<?> array){
+
+        // Create a new arraylist
+        ArrayList<Array<?>> arrayList = new ArrayList<>(this.arrWithArr);
+
+        // Add the element to the array
+        arrayList.add(index, array);
+
+        // Assign the arrayList to the list
+        this.arrWithArr = arrayList;
+
+        return this.arrWithArr.size();
+    }
+
+    /**
+     * Add element to the specified index.
+     * @param index: (int) index to add the index.
+     * @param element: (T) element to add to the array.
+     *  @return (int) Size of the array.
+     */
+    public int add(int index, T element){
+        // Create a new arraylist
+        ArrayList<T> arrayList = new ArrayList<>(this.arr);
+
+        // Add the element to the array
+        arrayList.add(index, element);
+
+        // Assign the arrayList to the list
+        this.arr = arrayList;
+
+        return this.arr.size();
+    }
 
     /**
      * Computes the mean of the numeric array.
-     * @return mean: mean of numeric array.
+     * @return mean: (double) mean of numeric array.
      */
     @Override
     public double mean(){
@@ -103,13 +179,26 @@ public class Array<T> implements Stats, Iterable<T>{
 
     /**
      * Computes the total sum of the array
-     *
-     * @return total sum of the array
+     * @param axis: (int) Integer for axis
+     * @return (Object) total sum of the array
+     */
+    @Override
+    public Object sum(int axis){
+        return null;
+    }
+
+    /**
+     * Computes the total sum of the array
+     * @return (double) total sum of the array
      */
     @Override
     public double sum() {
+        return this.computeTheSum(this.arr);
+    }
+
+    public Double computeTheSum(@NotNull List<?> arr) {
         // Map to double then sum all the values
-        var sum = this.arr.stream()
+        var sum = arr.stream()
                 .map(x -> Double.parseDouble(x.toString()))
                 .reduce(Double::sum);
 
@@ -123,8 +212,7 @@ public class Array<T> implements Stats, Iterable<T>{
 
     /**
      * Represents the size of the array.
-     *
-     * @return size the array.
+     * @return (int) size the array.
      */
     @Override
     public int size() {

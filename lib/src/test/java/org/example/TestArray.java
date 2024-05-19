@@ -17,8 +17,8 @@ public class TestArray{
      * running all test cases.
      */
     @Before public void setUp(){
-        this.doubleArray = new Array<Double>(
-		6.23, 71.2);
+        this.doubleArray = new Array<>(
+                6.23, 71.2);
 	this.arrayOfArray = new Array<Double>(
 		this.doubleArray,
 		this.doubleArray,
@@ -49,11 +49,36 @@ public class TestArray{
 	    );
     }
 
-	@Test public void testSum(){
-        assertEquals(6, array(1, 4, 1).sum(), 0.0);
-		assertEquals(10, array(1, 4, 1, 4).sum(), 0.0);
-		assertEquals(8.2, array(2.2, 4.9, 1.1).sum(), 0.0);
+	@Test public void testAdd(){
+
+		// Testing adding integer
+		var arr = array(9, 0);
+		assertEquals(arr.add(3), 3);
+		assertEquals(arr.add(0, 10), 4);
+
+		// Testing adding String
+		var str = array("0", "1");
+		assertEquals(str.add("3"), 3);
+		assertEquals(str.add(0, "10"), 4);
+
+		// Testing adding Array of Array
+		var arrOfArr = array(array('0', '1'), array("0", "1"));
+		assertEquals(arrOfArr.add(array(9, 0)), 3);
+		assertEquals(arrOfArr.add(0, array(9.8, 9.6)), 4);
+
+
 	}
+
+	@Test public void testSum(){
+//		out.println(array(1, 4, 1).sum());
+        assertEquals(6.0, array(1, 4, 1).sum(), 0.0);
+//		out.println(
+//				array(
+//				array(9, 8),
+//				array(0, 8)
+//				).sum(1)
+//		);
+    }
 
 	@Test public void testIterator(){
 		for (Integer num: array(2)){

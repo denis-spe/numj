@@ -3,3 +3,12 @@
 
 # Ignore Gradle build output directory
 build
+
+.TestArray.java.swm
+.TestArray.java.swn
+.TestArray.java.swo
+.TestArray.java.swp
+
+.Array.java.swo
+.Array.java.swp
+.Stats.java.swp

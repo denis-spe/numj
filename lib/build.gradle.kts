@@ -24,6 +24,9 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation(libs.guava)
+
+    // https://mvnrepository.com/artifact/org.jetbrains/annotations
+    implementation("org.jetbrains:annotations:24.1.0")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
